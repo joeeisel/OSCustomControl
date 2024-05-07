@@ -7,6 +7,8 @@ namespace OSCustomControl
 
     public class SignaturePad : HtmlPresenter
     {
+        private readonly DotNetObjectReference<SignaturePad> objRef;
+
         public SignaturePad()
         {
             objRef = DotNetObjectReference.Create(this);
@@ -26,14 +28,19 @@ namespace OSCustomControl
         {
             Console.WriteLine("");
             Console.WriteLine("[SignaturePad_Loaded] BEGIN");
-            // UNCOMMENT THIS TO FIX the control - shouldn't need to do this
-            object forceDomUpdate = this.DomElement; // Adding this line seems to update the DOM, such that when
+
+            // UNCOMMENT THIS TO FIX the control - shouldn't need to do this though.
+            object forceDomUpdate = this.DomElement;  // This property is deprecated
+            // Adding this line seems to update the DOM, such that when
             // virtuoso.setupSignature is called document.getElementById("signature-pad") returns the DIV and not null?
+
+            // Does not work like this.DomElement even though the tooltip for GetDiv() states the following: "Consider calling this
+            // method from the 'Loaded' event to ensure that the element is in the visual tree."
+            //object ourDiv = OpenSilver.Interop.GetDiv(this);
+
             await JSInterop.Runtime.InvokeVoidAsync("virtuoso.setupSignature", objRef);
             Console.WriteLine("[SignaturePad_Loaded] END");
         }
-
-        private readonly DotNetObjectReference<SignaturePad> objRef;
 
         public async void SetupSignature()
         {
