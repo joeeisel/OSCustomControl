@@ -30,7 +30,7 @@ namespace OSCustomControl
             Console.WriteLine("[SignaturePad_Loaded] BEGIN");
 
             // UNCOMMENT THIS TO FIX the control - shouldn't need to do this though.
-            object forceDomUpdate = this.DomElement;  // This property is deprecated
+            //object forceDomUpdate = this.DomElement;  // This property is deprecated
             // Adding this line seems to update the DOM, such that when
             // virtuoso.setupSignature is called document.getElementById("signature-pad") returns the DIV and not null?
 
