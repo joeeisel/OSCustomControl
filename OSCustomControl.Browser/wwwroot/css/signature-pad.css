@@ -3,7 +3,7 @@
 *::after {
     box-sizing: border-box;
 }
-
+/*
 .signature-pad {
     position: relative;
     display: -webkit-box;
@@ -25,7 +25,7 @@
     padding: 16px;
 }
 
-/*.signature-pad::before,
+.signature-pad::before,
 .signature-pad::after {
     position: absolute;
     z-index: -1;
@@ -47,7 +47,7 @@
     right: 20px;
     -webkit-transform: skew(3deg) rotate(3deg);
     transform: skew(3deg) rotate(3deg);
-}*/
+}
 
 .signature-pad--body {
     position: relative;
@@ -104,3 +104,4 @@
         min-height: 2em;
     }
 }
+*/

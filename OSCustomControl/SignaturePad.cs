@@ -11,17 +11,12 @@ namespace OSCustomControl
         {
             objRef = DotNetObjectReference.Create(this);
 
-            //this.Html = @"<div id=""signature-pad"" class=""signature-pad"">
-            //            <div class=""signature-pad--body"">SIGNATURE PAD CANVAS</div>
-            //            </div>";
             this.Html = @"<div id=""signature-pad"" class=""signature-pad"">
                         <div class=""signature-pad--body"">
                             <canvas width=""540px"" height=""165px"" style=""width:540px;height:165px;""></canvas>
                         </div></div>";
 
-            // Tried using Loaded instead of INTERNAL_OnAttachedToVisualTree(), but in both cases when the JavaScript method virtuoso.setupSignature() is called
-            // from C#, the DOM doesn't have our signature-pad DIV - e.g. this fails:
-            //          let _wrapper = document.getElementById("signature-pad");
+            // Using Loaded instead of INTERNAL_OnAttachedToVisualTree()
             this.Loaded += SignaturePad_Loaded;
         }
 
@@ -29,7 +24,13 @@ namespace OSCustomControl
         // The Javascript in virtuoso.setupSignature() is still failing to find the DIV with ID signature-pad
         private async void SignaturePad_Loaded(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine("");
+            Console.WriteLine("[SignaturePad_Loaded] BEGIN");
+            // UNCOMMENT THIS TO FIX the control - shouldn't need to do this
+            object forceDomUpdate = this.DomElement; // Adding this line seems to update the DOM, such that when
+            // virtuoso.setupSignature is called document.getElementById("signature-pad") returns the DIV and not null?
             await JSInterop.Runtime.InvokeVoidAsync("virtuoso.setupSignature", objRef);
+            Console.WriteLine("[SignaturePad_Loaded] END");
         }
 
         private readonly DotNetObjectReference<SignaturePad> objRef;
@@ -39,22 +40,47 @@ namespace OSCustomControl
             await JSInterop.Runtime.InvokeVoidAsync("virtuoso.setupSignature", objRef);
         }
 
+        public override object CreateDomElement(object parentRef, out object domElementWhereToPlaceChildren)
+        {
+            try
+            {
+                Console.WriteLine("");
+                Console.WriteLine("[CreateDomElement] BEGIN");
+                return base.CreateDomElement(parentRef, out domElementWhereToPlaceChildren);
+            }
+            finally
+            {
+                Console.WriteLine("[CreateDomElement] END");
+            }
+        }
+
         // The Javascript in virtuoso.setupSignature() is failing to find the DIV with ID signature-pad, so moved this call to the Loaded even to try it there
-        //protected override async void INTERNAL_OnAttachedToVisualTree()
-        //{
-        //    base.INTERNAL_OnAttachedToVisualTree();
-        //    await JSInterop.Runtime.InvokeVoidAsync("virtuoso.setupSignature", objRef);
-        //}
+        protected override async void INTERNAL_OnAttachedToVisualTree()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("[INTERNAL_OnAttachedToVisualTree] BEGIN");
+            base.INTERNAL_OnAttachedToVisualTree();
+            // await JSInterop.Runtime.InvokeVoidAsync("virtuoso.setupSignature", objRef);
+            Console.WriteLine("[INTERNAL_OnAttachedToVisualTree] END");
+        }
 
         protected override async void INTERNAL_OnDetachedFromVisualTree()
         {
+            Console.WriteLine("");
+            Console.WriteLine("[INTERNAL_OnDetachedFromVisualTree] BEGIN");
             base.INTERNAL_OnDetachedFromVisualTree();
             await JSInterop.Runtime.InvokeVoidAsync("virtuoso.cleanupSignature");
+            Console.WriteLine("[INTERNAL_OnDetachedFromVisualTree] END");
         }
 
         public async void Clear()
         {
             await JSInterop.Runtime.InvokeVoidAsync("virtuoso.clearSignature");
+        }
+
+        public async void CleanupSignaturePad()
+        {
+            await JSInterop.Runtime.InvokeVoidAsync("virtuoso.cleanupSignature");
         }
 
         [JSInvokable]
