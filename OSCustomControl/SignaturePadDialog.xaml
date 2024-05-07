@@ -1,16 +1,16 @@
-﻿<ChildWindow x:Class="OSCustomControl.Dialog"
+﻿<ChildWindow x:Class="OSCustomControl.SignaturePadDialog"
            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
            Width="400" Height="300" 
-           Title="ChildWindow"
+           Title="SignaturePadDialog"
            xmlns:local="clr-namespace:OSCustomControl">
     <Grid x:Name="LayoutRoot" Margin="2">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Margin="10" Padding="10" BorderThickness="1" BorderBrush="Gray" Background="LightGray" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <local:TextBoxUserControl />
+        <Border Grid.Row="0" Margin="10" Padding="10" BorderThickness="1" BorderBrush="Gray" Background="LightGray" HorizontalAlignment="Left" VerticalAlignment="Top" Width="540" Height="165">
+            <local:SignaturePad />
         </Border>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Button x:Name="CancelButton" Content="Cancel" Click="CancelButton_Click" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,0,0" Grid.Row="1" />

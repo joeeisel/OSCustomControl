@@ -1,11 +1,11 @@
-namespace OSCustomControl
+﻿namespace OSCustomControl
 {
     using System.Windows;
     using System.Windows.Controls;
 
-    public partial class Dialog : ChildWindow
+    public partial class SignaturePadDialog : ChildWindow
     {
-        public Dialog()
+        public SignaturePadDialog()
         {
             InitializeComponent();
         }

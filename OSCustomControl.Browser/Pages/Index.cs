@@ -1,13 +1,14 @@
-﻿using DotNetForHtml5;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.JSInterop;
-using OSCustomControl.Browser.Interop;
-using System;
-using System.Threading.Tasks;
-
 namespace OSCustomControl.Browser.Pages
 {
+    using DotNetForHtml5;
+    using Microsoft.AspNetCore.Components;
+    using Microsoft.AspNetCore.Components.Rendering;
+    using Microsoft.JSInterop;
+    using Microsoft.JSInterop.WebAssembly;
+    using OSCustomControl.Browser.Interop;
+    using System;
+    using System.Threading.Tasks;
+
     [Route("/")]
     public class Index : ComponentBase
     {
@@ -23,6 +24,8 @@ namespace OSCustomControl.Browser.Pages
             {
                 throw new InvalidOperationException("Failed to initialize OpenSilver. Check your browser's console for error details.");
             }
+
+            JSInterop.Runtime = JSRuntime as WebAssemblyJSRuntime;
 
             Cshtml5Initializer.Initialize(new UnmarshalledJavaScriptExecutionHandler(JSRuntime));
             Program.RunApplication();

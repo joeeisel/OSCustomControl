@@ -21,8 +21,10 @@ namespace OSCustomControl
 
             base.INTERNAL_OnAttachedToVisualTree();
 
+            object div = OpenSilver.Interop.GetDiv(this);
+
             // NOTE: this.DomElement is null
-            Console.WriteLine($"[INTERNAL_OnAttachedToVisualTree] END DomElement IS NULL: {this.DomElement == null}");
+            Console.WriteLine($"[INTERNAL_OnAttachedToVisualTree] END DomElement IS NULL: {this.DomElement == null}, div is null = {div == null}, div: {div}");
         }
 
         // Added - not part of documentation - https://doc.opensilver.net/documentation/in-depth-topics/html-presenter.html
@@ -68,10 +70,15 @@ namespace OSCustomControl
         {
             Console.WriteLine($"[NumericTextBox_Loaded] BEGIN");
 
+            object div = OpenSilver.Interop.GetDiv(this);
+
+            // div = CSHTML5.Internal.INTERNAL_HtmlDomElementReference (references the DIV wrapping the INPUT element)
+            // this.DomElement = CSHTML5.Types.JSObjectRef (references the INPUT element)
+
             // Here, the control has been added to the visual tree, so the DOM element exists. We set the initial value:
             OpenSilver.Interop.ExecuteJavaScript("$0.value = $1", this.DomElement, _value);
 
-            Console.WriteLine($"[NumericTextBox_Loaded] END DomElement IS NULL: {this.DomElement == null}");
+            Console.WriteLine($"[NumericTextBox_Loaded] END DomElement IS NULL: {this.DomElement == null}, div is null = {div == null}, div: {div}");
         }
     }
 }
