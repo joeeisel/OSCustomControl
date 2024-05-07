@@ -15,41 +15,16 @@
         <ApplicationDefinition Include="App.xaml">
             <Generator>MSBuild:Compile</Generator>
         </ApplicationDefinition>
-        <Page Include="Dialog.xaml">
-            <Generator>MSBuild:Compile</Generator>
-        </Page>
         <Page Include="MainPage.xaml">
-            <Generator>MSBuild:Compile</Generator>
-        </Page>
-        <Page Include="SignaturePadDialog.xaml">
-          <Generator>MSBuild:Compile</Generator>
-        </Page>
-        <Page Include="TextBoxUserControl.xaml">
             <Generator>MSBuild:Compile</Generator>
         </Page>
     </ItemGroup>
 
     <ItemGroup>
         <Compile Include="App.xaml.cs" />
-        <Compile Include="Dialog.xaml.cs" />
         <Compile Include="JSInterop.cs" />
         <Compile Include="MainPage.xaml.cs" />
         <Compile Include="SignaturePad.cs" />
-        <Compile Include="SignaturePadDialog.xaml.cs" />
-        <Compile Include="TestNumericTextBox.cs" />
-        <Compile Include="TextBoxUserControl.xaml.cs" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <UpToDateCheckInput Remove="Dialog.xaml" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <UpToDateCheckInput Remove="TextBoxUserControl.xaml" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <UpToDateCheckInput Remove="SignaturePadDialog.xaml" />
     </ItemGroup>
 
 </Project>
