@@ -2,6 +2,7 @@ namespace OSCustomControl
 {
     using CSHTML5.Native.Html.Controls;
     using Microsoft.JSInterop;
+    using System;
     using System.Windows;
 
     public class SignaturePad : HtmlPresenter
@@ -18,9 +19,14 @@ namespace OSCustomControl
                             <canvas width=""540px"" height=""165px"" style=""width:540px;height:165px;""></canvas>
                         </div></div>";
 
+            // Tried using Loaded instead of INTERNAL_OnAttachedToVisualTree(), but in both cases when the JavaScript method virtuoso.setupSignature() is called
+            // from C#, the DOM doesn't have our signature-pad DIV - e.g. this fails:
+            //          let _wrapper = document.getElementById("signature-pad");
             this.Loaded += SignaturePad_Loaded;
         }
 
+
+        // The Javascript in virtuoso.setupSignature() is still failing to find the DIV with ID signature-pad
         private async void SignaturePad_Loaded(object sender, RoutedEventArgs e)
         {
             await JSInterop.Runtime.InvokeVoidAsync("virtuoso.setupSignature", objRef);
@@ -28,6 +34,12 @@ namespace OSCustomControl
 
         private readonly DotNetObjectReference<SignaturePad> objRef;
 
+        public async void SetupSignature()
+        {
+            await JSInterop.Runtime.InvokeVoidAsync("virtuoso.setupSignature", objRef);
+        }
+
+        // The Javascript in virtuoso.setupSignature() is failing to find the DIV with ID signature-pad, so moved this call to the Loaded even to try it there
         //protected override async void INTERNAL_OnAttachedToVisualTree()
         //{
         //    base.INTERNAL_OnAttachedToVisualTree();
