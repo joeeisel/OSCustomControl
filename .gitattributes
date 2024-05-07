@@ -1,0 +1,9 @@
+# Auto detect text files and perform LF normalization
+# https://www.davidlaing.com/2012/09/19/customise-your-gitattributes-to-become-a-git-ninja/
+#*    text=auto
+
+#https://stackoverflow.com/questions/12809951/git-cannot-undo-modified-files
+#To turn off line ending modification for your project, open or create .gitattributes at the root of your repository. Ensure that the file contains this line:
+* -text
+
+*.cs -text diff=csharp
