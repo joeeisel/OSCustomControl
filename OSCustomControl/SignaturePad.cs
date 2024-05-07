@@ -62,12 +62,17 @@ namespace OSCustomControl
         }
 
         // The Javascript in virtuoso.setupSignature() is failing to find the DIV with ID signature-pad, so moved this call to the Loaded even to try it there
-        protected override async void INTERNAL_OnAttachedToVisualTree()
+        protected override void INTERNAL_OnAttachedToVisualTree()
         {
             Console.WriteLine("");
             Console.WriteLine("[INTERNAL_OnAttachedToVisualTree] BEGIN");
+
             base.INTERNAL_OnAttachedToVisualTree();
-            // await JSInterop.Runtime.InvokeVoidAsync("virtuoso.setupSignature", objRef);
+
+            // This is how the original pre OpenSilver 2.1 code worked.  I moved this interop call to Loaded event, but
+            // still having the problem where virtuoso.setupSignature() is still failing to find the DIV with ID signature-pad
+            //JSInterop.Runtime.InvokeVoidAsync("virtuoso.setupSignature", objRef);
+
             Console.WriteLine("[INTERNAL_OnAttachedToVisualTree] END");
         }
 
