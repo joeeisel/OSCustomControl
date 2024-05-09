@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-
 namespace OSCustomControl
 {
+    using System.Windows;
+
     public sealed partial class App : Application
     {
         public App()
