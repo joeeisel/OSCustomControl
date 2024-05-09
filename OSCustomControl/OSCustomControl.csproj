@@ -8,7 +8,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.JSInterop.WebAssembly" Version="8.0.4" />
-        <PackageReference Include="OpenSilver" Version="2.2.0" />
+        <PackageReference Include="OpenSilver" Version="2.0.1" />
     </ItemGroup>
 
     <ItemGroup>

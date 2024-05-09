@@ -20,11 +20,6 @@ namespace OSCustomControl.Browser.Pages
         {
             await base.OnInitializedAsync();
 
-            if (!await JSRuntime.InvokeAsync<bool>("getOSFilesLoadedPromise"))
-            {
-                throw new InvalidOperationException("Failed to initialize OpenSilver. Check your browser's console for error details.");
-            }
-
             JSInterop.Runtime = JSRuntime as WebAssemblyJSRuntime;
 
             Cshtml5Initializer.Initialize(new UnmarshalledJavaScriptExecutionHandler(JSRuntime));

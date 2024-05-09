@@ -132,7 +132,7 @@ namespace OSCustomControl
             //OpenSilver.Interop.ExecuteJavaScriptVoid("virtuoso.info"); // This also works to allow 'virtuoso.setupSignature' to run getElementById("signature-pad") successfully
             //OpenSilver.Interop.ExecuteJavaScriptVoid("virtuoso.setupSignature", objRef);;
 
-            await Task.Delay(250);  // works
+            //await Task.Delay(250);  // works in OpenSilver 2.2
             //var prime = this.DomElement; // does not work
             //await JSInterop.Runtime.InvokeVoidAsync("virtuoso.info");
             await JSInterop.Runtime.InvokeVoidAsync("virtuoso.setupSignature", objRef);
